@@ -19,7 +19,7 @@ export const todosSlice = createSlice({
       state.items = action.payload;
       state.isLoading = false;
     },
-    startLoading: (state) => {
+    startLoading: state => {
       state.isLoading = true;
     },
   },

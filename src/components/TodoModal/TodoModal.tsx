@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Loader } from '../Loader';
 import { setCurrentTodo } from '../../features/currentTodo';
+import { getUser } from '../../api';
+import { User } from '../../types/User';
 
 export const TodoModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const currentTodo = useAppSelector(state => state.currentTodo);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (currentTodo) {
+      getUser(currentTodo.userId).then(curuser => {
+        setUser(curuser);
+      });
+    }
+  }, [currentTodo]);
 
   if (!currentTodo) {
     return null;
   }
 
-  const { id, title, completed, user } = currentTodo;
+  const { id, title, completed } = currentTodo;
 
   return (
     <div className="modal is-active" data-cy="modal">

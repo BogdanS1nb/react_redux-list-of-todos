@@ -6,7 +6,7 @@ import { Todo } from '../../types/Todo';
 
 export const TodoList: React.FC = () => {
   const dispatch = useAppDispatch();
-  const todos = useAppSelector(state => state.todos);
+  const todos = useAppSelector(state => state.todos.items);
   const { status, query } = useAppSelector(state => state.filter);
   const currentTodo = useAppSelector(state => state.currentTodo);
 
